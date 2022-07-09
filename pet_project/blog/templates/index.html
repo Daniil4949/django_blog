@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="row">
+       
+    {% for post in posts %}
+<div class="card" style="width: 18rem; margin-left: 25px;margin-right:25px; margin-bottom:25px;">
+    <img src="{{post.photo}}" class="card-img-top" alt="...">
+    <div class="card-body">
+      <h5 class="card-title"> {{post.title}} </h5>
+      <p class="card-text"> {{ post.content|truncatewords:25 }}</p>
+      <h6>Category: {{post.category}}</h6>
+      <a href="#" class="btn btn-primary">Read more</a>
+      
+    </div>
+  </div>
+  {% endfor %}
+
+
+</div>
+{% endblock %}
