@@ -8,9 +8,9 @@
     <img src="{{post.photo}}" class="card-img-top" alt="...">
     <div class="card-body">
       <h5 class="card-title"> {{post.title}} </h5>
-      <p class="card-text"> {{ post.content|truncatewords:25 }}</p>
+      <p class="card-text" style="margin-left:5px; margin-right: 5px;"> {{ post.content|linebreaks|truncatewords:25 }}</p>
       <h6>Category: {{post.category}}</h6>
-      <a href="#" class="btn btn-primary">Read more</a>
+      <a href="{% url 'post' post.id %}" class="btn btn-primary">Read more</a>
       
     </div>
   </div>
