@@ -26,3 +26,13 @@ class RegistrationUserForm(UserCreationForm):
         if data['password1'] != data['password2']:
             raise forms.ValidationError("Passwods didn't match!")
         return data['password2']
+
+
+class LoginUserForm(AuthenticationForm):
+    
+    class Meta:
+        model = User
+        fields = ('username',)
+    username = forms.CharField(label='login', widget=forms.TextInput(attrs={'class': 'form-input'})),
+    #email = forms.EmailField(label='email', widget=forms.EmailInput(attrs={'class': 'form-input'})),
+    password = forms.CharField(label='password', widget=forms.PasswordInput(attrs={'class': 'form-input'}))

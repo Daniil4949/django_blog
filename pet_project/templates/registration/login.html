@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% block content %}
+ {% if form.errors %}
+
+    <div class="alert alert-danger alert-dismissible">
+        <button type="button" class="close" data-dismiss="alert">&times;</button>
+        <strong>Error!</strong> Incorrect login or password. Please, try again.
+    </div>
+ {% endif %}
+
+<form method="post" action="{% url 'login' %}">
+    {% csrf_token %}
+    <div class="input-group mb-3" style="margin-left: 650px; margin-right: 250px;"><h4>Enter your profile</h4></div>
+    <div class="input-group mb-3" style="margin-left: 500px; margin-right: 250px;">
+        <span class="input-group-text" id="basic-addon1">@</span>
+        <input type="text" name="username" class="form-control" placeholder="Username" aria-label="username" aria-describedby="basic-addon1" style="margin-right: 1050px;">
+      </div>
+
+      <div class="input-group mb-3" style="margin-left: 500px; margin-right: 250px;">
+        <span class="input-group-text" id="basic-addon3">password</span>
+        <input type="password" class="form-control" name="password" id="basic-url" placeholder="Enter your password" aria-describedby="basic-addon3" style="margin-right: 1050px;">
+      </div>
+      <a href="{% url 'password_reset' %}" style="margin-left:650px; margin-bottom:15px; margin-top:15px;">Forgot your password?</a>
+      <button type="submit" class="btn btn-primary" style="margin-left:700px; margin-top:15px;">Log in</button>
+</form>
+
+{% endblock %}

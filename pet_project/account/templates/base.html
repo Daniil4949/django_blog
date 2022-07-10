@@ -90,9 +90,7 @@
         <header class="blog-header lh-1 py-3">
           <div class="row flex-nowrap justify-content-between align-items-center">
             <div class="col-4 pt-1">
-              {% if request.user.is_authenticated %}
-              <a class="link-secondary" href="#">Hi, {{request.user.username}}!</a>
-              {% endif %}
+              <a class="link-secondary" href="#">Subscribe</a>
             </div>
             <div class="col-4 text-center">
               <a class="blog-header-logo text-dark" href="{% url 'home' %}">Large</a>
@@ -101,14 +99,12 @@
                 <form class="d-flex" role="search">
                     <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
                     <button class="btn btn-sm btn-outline-secondary" style="margin-right:10px;" type="submit">Search  </button>
-                    {%  if request.user.is_authenticated %}
-                    <a href="{% url 'logout' %}" role="button" class="btn btn-primary" style="margin-left: 15px;">Log out</a>
-                    {% else %}
                     <a href="{% url 'registration' %}" role="button" class="btn btn-primary" style="margin-left: 15px;">Sign in</a>
                     <a href="{% url 'login' %}" role="button" class="btn btn-primary" style="margin-left: 15px;">Log in</a>
+                    {% if request.user.is_authenticated %}
+                    {{ request.user.username }}
                     {% endif %}
                   </form>
-                  
             </div>
           </div>
         </header>
