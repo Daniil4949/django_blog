@@ -1,14 +1,14 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<h1> {{ post.title }} </h1>
+<h1> <div  style="margin-left:25px; font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif"> {{ post.title }} </div> </h1>
 
 
 {% if post.photo %}
 	<p><img class="img-article-left thumb" src="{{post.photo}}" style="margin-left:25px;"></p>
 {% endif %}
+<div style="margin-left:25px;margin-right:25px;font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif">{{post.content|linebreaks}}</div>
 
-{{post.content|linebreaks}}
 
 
 {% endblock %}

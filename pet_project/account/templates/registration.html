@@ -13,23 +13,25 @@
 {% endif %}
 <form method="post" action="{% url 'registration' %}">
     {% csrf_token %}
-    <div class="input-group mb-3" style="margin-left: 100px; margin-right: 250px;">
+    <div class="input-group mb-3" style="margin-left: 670px; margin-right: 250px;"><h4>Registration</h4></div>
+    <div class="input-group mb-3" style="margin-left: 500px; margin-right: 250px;">
         <span class="input-group-text" id="basic-addon1">@</span>
         <input type="text" name="username" class="form-control" placeholder="Username" aria-label="username" aria-describedby="basic-addon1" style="margin-right: 1050px;">
       </div>
-      <div class="input-group mb-3" style="margin-left: 100px; margin-right: 250px;">
+      <div class="input-group mb-3" style="margin-left: 500px; margin-right: 250px;">
         <span class="input-group-text" id="basic-addon3">.com</span>
         <input type="email" class="form-control" name="email" id="basic-url" placeholder="Email" aria-describedby="basic-addon3" style="margin-right: 1050px;">
       </div>
 
-      <div class="input-group mb-3" style="margin-left: 100px; margin-right: 250px;">
+      <div class="input-group mb-3" style="margin-left: 500px; margin-right: 250px;">
         <span class="input-group-text" id="basic-addon3">password</span>
         <input type="password" class="form-control" name="password1" id="basic-url" placeholder="Enter your password" aria-describedby="basic-addon3" style="margin-right: 1050px;">
       </div>
-      <div class="input-group mb-3" style="margin-left: 100px; margin-right: 250px;">
+      <div class="input-group mb-3" style="margin-left: 500px; margin-right: 250px;">
         <span class="input-group-text" id="basic-addon3">password</span>
         <input type="password" class="form-control" name="password2" id="basic-url" placeholder="Submit your password" aria-describedby="basic-addon3" style="margin-right: 1050px;">
       </div>
-      <button type="submit" class="btn btn-primary" style="margin-left:100px">Sign up</button>
+      <button type="submit" class="btn btn-primary" style="margin-left:700px; margin-bottom: 100px;">Sign up</button>
+      
 </form>
 {% endblock %}
