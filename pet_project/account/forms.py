@@ -29,8 +29,7 @@ class RegistrationUserForm(UserCreationForm):
         return data['password2']
 
 
-class FormWithCaptcha(forms.Form):
-    captcha = ReCaptchaField()
+
 
 class LoginUserForm(AuthenticationForm):
     

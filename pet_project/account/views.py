@@ -6,7 +6,6 @@ from blog.forms import ProfileForm
 from django.contrib.auth.decorators import login_required
 
 def registration(request):
-    captcha = FormWithCaptcha()
     queryset = Category.objects.all()
     posts = Post.objects.all()
     if request.method == 'POST':

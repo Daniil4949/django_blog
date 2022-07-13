@@ -1,3 +1,4 @@
+from urllib import request
 from django.http import HttpRequest, HttpResponse
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
@@ -50,30 +51,6 @@ class BlogCategory(DataMixin, ListView):
     def get_queryset(self):
         return self.queryset.filter(category=self.kwargs.get('category_id'))
 
-    
-    
-
-
-
-def index(request):
-    queryset = Category.objects.all()
-    posts = Post.objects.all()
-    user = request.user
-
-    return render(request, 'index.html', {'categories': queryset, 'posts': posts, 'user': user, })
-
-def post(request, post_id):
-    post = Post.objects.get(pk=post_id)
-    queryset = Category.objects.all()
-    images = PhotoPost.objects.filter(post=post)
-    return render(request, 'post.html', {'categories': queryset, 'post': post, 'images': images})
-
-def show_category_post(request, category_id):
-    queryset = Category.objects.all()
-    posts = Post.objects.filter(category=category_id)
-    return render(request, 'index.html', {'categories': queryset, 'posts': posts})
-
-
 def search_post(request):
     queryset = Category.objects.all()
     search_form = Search_Post_Form(request.POST)
@@ -85,6 +62,49 @@ def search_post(request):
     if post:
         return render(request, 'index.html', {'categories': queryset, 'posts': post})
     return render(request, 'not_found.html', {'categories': queryset, 'post': post})
+
+    
+#class SearchPost(DataMixin, FormView):
+#    template_name = 'index.html'
+#    form_class = Search_Post_Form
+#    search_form = Search_Post_Form()
+#    success_url = '/blog/'
+#    queryset = Post.objects.all()
+#    def get_context_data(self, *, object_list=None, **kwargs):
+#        context = super().get_context_data(**kwargs)
+#        info = self.get_post_content()
+#        search_result = self.queryset.filter(title=SearchPost.search_form.cleaned_data['search_post'])
+#        if search_result:
+#            context = dict(list(context.items()) + list(info.items()))
+#            context['posts'] = search_result
+#            return context
+#        context = dict(list(context.items()) + list(info.items()))
+#        return context
+#
+#    def get_queryset(self):
+#        return self.queryset.filter(title=Search_Post_Form.data['search_post'])
+
+
+#def index(request):
+#    queryset = Category.objects.all()
+#    posts = Post.objects.all()
+#    user = request.user
+#
+#    return render(request, 'index.html', {'categories': queryset, 'posts': posts, 'user': user, })
+
+#def post(request, post_id):
+#    post = Post.objects.get(pk=post_id)
+#    queryset = Category.objects.all()
+#    images = PhotoPost.objects.filter(post=post)
+#    return render(request, 'post.html', {'categories': queryset, 'post': post, 'images': images})
+
+#def show_category_post(request, category_id):
+#    queryset = Category.objects.all()
+#    posts = Post.objects.filter(category=category_id)
+#    return render(request, 'index.html', {'categories': queryset, 'posts': posts})
+
+
+
 
     
     
