@@ -31,6 +31,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'captcha',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -122,6 +123,10 @@ STATIC_URL = 'static/'
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
 
+
+RECAPTCHA_PUBLIC_KEY = '6Lf6rekgAAAAAApygNJRjsmZoGe42tkO-oh00oRQ'
+RECAPTCHA_PRIVATE_KEY = '6Lf6rekgAAAAABbig_0hV-nIqKIjcItD01E_8H5O'
+RECAPTCHA_REQUIRED_SCORE = 0.85
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 LOGIN_REDIRECT_URL = '/blog/'
 LOGOUT_REDIRECT_URL = '/blog/'

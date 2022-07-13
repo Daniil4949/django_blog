@@ -1,8 +1,8 @@
 {% extends 'base.html' %}
 
 {% block content %}
+<div style="margin-left:300px; margin-right:300px; margin-top:50px; margin-bottom: 100px;">
 {% if user_form.errors %}
-
 <div class="alert alert-danger alert-dismissible">
     <button type="button" class="close" data-dismiss="alert">&times;</button>
     <strong>Error!</strong> 
@@ -13,25 +13,27 @@
 {% endif %}
 <form method="post" action="{% url 'registration' %}">
     {% csrf_token %}
-    <div class="input-group mb-3" style="margin-left: 670px; margin-right: 250px;"><h4>Registration</h4></div>
-    <div class="input-group mb-3" style="margin-left: 500px; margin-right: 250px;">
+   <center><h4>Registration</h4></center>
+    <div class="input-group mb-3">
         <span class="input-group-text" id="basic-addon1">@</span>
-        <input type="text" name="username" class="form-control" placeholder="Username" aria-label="username" aria-describedby="basic-addon1" style="margin-right: 1050px;">
+        <input type="text" name="username" class="form-control" placeholder="Username" aria-label="username" aria-describedby="basic-addon1">
       </div>
-      <div class="input-group mb-3" style="margin-left: 500px; margin-right: 250px;">
+      <div class="input-group mb-3" >
         <span class="input-group-text" id="basic-addon3">.com</span>
-        <input type="email" class="form-control" name="email" id="basic-url" placeholder="Email" aria-describedby="basic-addon3" style="margin-right: 1050px;">
+        <input type="email" class="form-control" name="email" id="basic-url" placeholder="Email" aria-describedby="basic-addon3">
       </div>
 
-      <div class="input-group mb-3" style="margin-left: 500px; margin-right: 250px;">
+      <div class="input-group mb-3" >
         <span class="input-group-text" id="basic-addon3">password</span>
-        <input type="password" class="form-control" name="password1" id="basic-url" placeholder="Enter your password" aria-describedby="basic-addon3" style="margin-right: 1050px;">
+        <input type="password" class="form-control" name="password1" id="basic-url" placeholder="Enter your password" aria-describedby="basic-addon3">
       </div>
-      <div class="input-group mb-3" style="margin-left: 500px; margin-right: 250px;">
+      <div class="input-group mb-3">
         <span class="input-group-text" id="basic-addon3">password</span>
-        <input type="password" class="form-control" name="password2" id="basic-url" placeholder="Submit your password" aria-describedby="basic-addon3" style="margin-right: 1050px;">
+        <input type="password" class="form-control" name="password2" id="basic-url" placeholder="Submit your password" aria-describedby="basic-addon3">
       </div>
-      <button type="submit" class="btn btn-primary" style="margin-left:700px; margin-bottom: 100px;">Sign up</button>
-      
+      <center>{{ user_form.captcha }}</center>
+      <center><button type="submit" style="margin-top:20px;"class="btn btn-primary">Sign up</button></center>
 </form>
+
+</div>
 {% endblock %}

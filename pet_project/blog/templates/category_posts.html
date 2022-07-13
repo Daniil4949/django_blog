@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+{% block content %}
+{% if posts %}
+{% for post in posts %}
+<br>
+  <hr>
+    <hr>
+    <p><img class="img-article-left thumb" src="{{post.photo}}" style="margin-left:25px;"></p>
+      <div class="card-body">
+        <h6 class="card-text"> {{ post.time_created }} </h6>
+        <h5 class="card-title"> {{post.title}} </h5>
+        <p class="card-text" style="margin-left:5px; margin-right: 25px; margin-left: 45px;"> {{ post.content|linebreaks|truncatewords:80 }} <a href="{% url 'post' post.id %}">Read more</a></p>
+      
+        <h6>Category: {{post.category}}</h6>
+    
+        <br>
+    </div>
+  
+  
+  {% endfor %}
+
+</div>
+
+{% else %}
+<div style="margin-left: 500px; margin-top:50px; margin-bottom:300px;">
+  <h3>Sorry, but there is nothing to show...</h3>
+  </div>
+{% endif %}  
+{% endblock %}

@@ -4,7 +4,55 @@ from django.contrib.auth.decorators import login_required
 from .forms import Search_Post_Form, ProfileForm
 from .models import *
 from django import forms 
+from .utils import *
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.views.generic import ListView, DetailView, CreateView, FormView
 # Create your views here.
+
+class BlogHome(DataMixin, ListView):
+    model = Post
+    context_object_name = 'posts'
+    template_name = 'index.html'
+    def get_context_data(self, *, object_list=None, **kwargs):
+        context = super().get_context_data(**kwargs)
+        info = self.get_post_content()
+        context = dict(list(context.items()) + list(info.items()))
+        return context
+
+    def get_queryset(self):
+        return Post.objects.all()
+        
+
+class BlogPost(DataMixin, DetailView):
+    model = Post
+    context_object_name = 'post'
+    template_name = 'post.html'
+    pk_url_kwarg = 'post_id'
+
+    def get_context_data(self, *, object_list=None, **kwargs):
+        context = super().get_context_data(**kwargs)
+        info = self.get_post_content()
+        context = dict(list(context.items()) + list(info.items()))
+        return context
+
+    
+class BlogCategory(DataMixin, ListView):
+    model = Post
+    context_object_name = 'posts'
+    template_name = 'category_posts.html'
+    queryset = Post.objects.all()
+    def get_context_data(self, *, object_list=None, **kwargs):
+        context = super().get_context_data(**kwargs)
+        info = self.get_post_content()
+        context = dict(list(context.items()) + list(info.items()))
+        return context
+
+    def get_queryset(self):
+        return self.queryset.filter(category=self.kwargs.get('category_id'))
+
+    
+    
+
 
 
 def index(request):
@@ -40,12 +88,3 @@ def search_post(request):
 
     
     
-@login_required
-def profile(request):
-    if request.method == 'POST':
-        profile_from = ProfileForm(request.POST, request.FILES, instance=request.user.profile)
-        if profile_from.is_valid():
-            profile_from.save()
-    data_user = Profile.objects.get(user=request.user)
-    profile_form = ProfileForm(instance=request.user.profile)
-    return render(request, 'profile.html', {'profile_form': profile_form, 'user': data_user})
