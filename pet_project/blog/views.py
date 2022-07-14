@@ -55,6 +55,7 @@ class BlogCategory(DataMixin, ListView):
         category = Category.objects.get(slug=self.kwargs.get('category_slug'))
         return self.queryset.filter(category=category)
 
+
 def search_post(request):
     queryset = Category.objects.all()
     search_form = Search_Post_Form(request.POST)

@@ -1,3 +1,4 @@
+from email.policy import default
 from rest_framework import serializers
 from blog.models import Post, Category
 from rest_framework.renderers import JSONRenderer
@@ -10,4 +11,13 @@ class BlogSerializer(serializers.ModelSerializer):
     class Meta:
         model = Post
         fields = '__all__'
+
+
+class CategorySerializer(serializers.ModelSerializer):
+    user = serializers.HiddenField(default=serializers.CurrentUserDefault)
+
+    class Meta:
+        model = Category
+        fields = '__all__'
+        
 
