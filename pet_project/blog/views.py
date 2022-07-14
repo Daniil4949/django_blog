@@ -10,10 +10,12 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic import ListView, DetailView, CreateView, FormView
 # Create your views here.
 
+
 class BlogHome(DataMixin, ListView):
     model = Post
     context_object_name = 'posts'
     template_name = 'index.html'
+
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super().get_context_data(**kwargs)
         info = self.get_post_content()
@@ -28,7 +30,7 @@ class BlogPost(DataMixin, DetailView):
     model = Post
     context_object_name = 'post'
     template_name = 'post.html'
-    pk_url_kwarg = 'post_id'
+    slug_url_kwarg = 'post_slug'
 
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -42,6 +44,7 @@ class BlogCategory(DataMixin, ListView):
     context_object_name = 'posts'
     template_name = 'category_posts.html'
     queryset = Post.objects.all()
+
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super().get_context_data(**kwargs)
         info = self.get_post_content()
@@ -49,7 +52,8 @@ class BlogCategory(DataMixin, ListView):
         return context
 
     def get_queryset(self):
-        return self.queryset.filter(category=self.kwargs.get('category_id'))
+        category = Category.objects.get(slug=self.kwargs.get('category_slug'))
+        return self.queryset.filter(category=category)
 
 def search_post(request):
     queryset = Category.objects.all()
