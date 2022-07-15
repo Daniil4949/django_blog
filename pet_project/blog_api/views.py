@@ -5,13 +5,13 @@ from rest_framework.response import Response
 from django.forms import model_to_dict
 from blog.models import Post, Category
 from .serializers import BlogSerializer, CategorySerializer
-from rest_framework.permissions import IsAuthenticatedOrReadOnly
+from rest_framework.permissions import IsAuthenticatedOrReadOnly, IsAuthenticated
 
 
 class BlogAPIList(generics.ListCreateAPIView):
     queryset = Post.objects.all()
     serializer_class = BlogSerializer
-    permission_classes = (IsAuthenticatedOrReadOnly,)
+    permission_classes = (IsAuthenticated,)
 
 
 class BlogAPIUpdate(generics.RetrieveUpdateAPIView):
@@ -22,7 +22,7 @@ class BlogAPIUpdate(generics.RetrieveUpdateAPIView):
 class CategoryApiList(generics.ListCreateAPIView):
     queryset = Category.objects.all()
     serializer_class = CategorySerializer
-    permission_classes = (IsAuthenticatedOrReadOnly,)
+    permission_classes = (IsAuthenticated,)
 
 
 class CategoryAPIUpdate(generics.RetrieveUpdateAPIView):

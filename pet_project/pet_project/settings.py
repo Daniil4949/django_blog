@@ -39,9 +39,11 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
+    'rest_framework.authtoken',
     'blog',
     'account',
     'blog_api',
+    'djoser',
 ]
 
 MIDDLEWARE = [
@@ -135,3 +137,20 @@ LOGOUT_REDIRECT_URL = '/blog/'
 PASSWORD_RESET_COMPLETE_REDIRECT_URL = '/accounts/login'
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'source/')
+
+REST_FRAMEWORK = {
+    'DEFAULT_RENDERER_CLASSES': [
+        'rest_framework.renderers.JSONRenderer',
+        'rest_framework.renderers.BrowsableAPIRenderer',
+    ],
+
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.AllowAny',
+    ],
+
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework.authentication.TokenAuthentication',
+        'rest_framework.authentication.BasicAuthentication',
+        'rest_framework.authentication.SessionAuthentication',
+    ]
+}
