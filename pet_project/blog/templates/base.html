@@ -92,7 +92,7 @@
             <div class="col-4 pt-1">
               {% if request.user.is_authenticated %}
               
-              <p><a class="link-secondary" href="{% url 'user_profile' %}"><img src="https://i.pinimg.com/originals/ef/bc/aa/efbcaac6c3273f4700721c2c021c1190.png" style="height: 20px; width: 7%; display: block;"class="card-img-top" alt="..."></a>Hi, {{request.user.username}}!</p>
+              <p><a class="link-secondary" href="{% url 'current_user_profile' %}"><img src="https://i.pinimg.com/originals/ef/bc/aa/efbcaac6c3273f4700721c2c021c1190.png" style="height: 20px; width: 7%; display: block;"class="card-img-top" alt="..."></a>Hi, {{request.user.username}}!</p>
               {% endif %}
             </div>
             <div class="col-4 text-center">

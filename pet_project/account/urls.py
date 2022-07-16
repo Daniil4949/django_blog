@@ -5,6 +5,6 @@ from account.views import *
 
 urlpatterns = [
     path('registration/', registration, name='registration'),
-    path('profile/', profile, name='user_profile'),
-
+    path('profile/', profile, name='current_user_profile'),
+    path('user_profile/<int:user_id>', get_profile, name='get_user_profile')
 ]

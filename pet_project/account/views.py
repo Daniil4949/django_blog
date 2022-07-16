@@ -7,6 +7,7 @@ from django.contrib.auth.decorators import login_required
 from blog.utils import DataMixin
 from django.views.generic import CreateView
 from django.urls import reverse_lazy
+from blog.models import Profile
 
 def registration(request):
     queryset = Category.objects.all()
@@ -33,6 +34,13 @@ def profile(request):
     data_user = Profile.objects.get(user=request.user)
     profile_form = ProfileForm(instance=request.user.profile)
     return render(request, 'profile.html', {'profile_form': profile_form, 'user': data_user})
+
+
+def get_profile(request, user_id):
+    user = User.objects.get(pk=user_id)
+    profile = Profile.objects.get(user=User.objects.get(pk=user_id))
+    return render(request, 'user_profile.html', {'profile': profile})
+
 
 
             
