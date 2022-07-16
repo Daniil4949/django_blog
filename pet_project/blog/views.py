@@ -61,7 +61,7 @@ def search_post(request):
     search_form = Search_Post_Form(request.POST)
     title = search_form.data['search_post']
     try:
-        post = Post.objects.filter(title=title)
+        post = Post.objects.filter(title__contains=str(title))
     except:
         post = ''
     if post:
