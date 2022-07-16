@@ -68,6 +68,8 @@ def search_post(request):
         return render(request, 'index.html', {'categories': queryset, 'posts': post})
     return render(request, 'not_found.html', {'categories': queryset, 'post': post})
 
+
+
     
 #class SearchPost(DataMixin, FormView):
 #    template_name = 'index.html'
