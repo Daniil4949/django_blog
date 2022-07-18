@@ -19,10 +19,10 @@ def registration(request):
             new_user.set_password(user_form.cleaned_data['password2'])
             new_user.save()
             Profile.objects.create(user=new_user)
-            return render(request, 'registration_complete.html', {'categories': queryset, 'posts': posts, 'user_form': user_form})
-        return render(request, 'registration.html', {'categories': queryset, 'posts': posts, 'user_form': user_form,})
+            return render(request, 'account/registration_complete.html', {'categories': queryset, 'posts': posts, 'user_form': user_form})
+        return render(request, 'account/registration.html', {'categories': queryset, 'posts': posts, 'user_form': user_form,})
     user_form = RegistrationUserForm()
-    return render(request, 'registration.html', {'categories': queryset,'user_form': user_form,})
+    return render(request, 'account/registration.html', {'categories': queryset,'user_form': user_form,})
     
 
 @login_required
@@ -33,13 +33,13 @@ def profile(request):
             profile_from.save()
     data_user = Profile.objects.get(user=request.user)
     profile_form = ProfileForm(instance=request.user.profile)
-    return render(request, 'profile.html', {'profile_form': profile_form, 'user': data_user})
+    return render(request, 'account/profile.html', {'profile_form': profile_form, 'user': data_user})
 
 
 def get_profile(request, user_id):
     user = User.objects.get(pk=user_id)
     profile = Profile.objects.get(user=User.objects.get(pk=user_id))
-    return render(request, 'user_profile.html', {'profile': profile})
+    return render(request, 'account/user_profile.html', {'profile': profile})
 
 
 

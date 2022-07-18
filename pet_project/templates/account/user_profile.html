@@ -1,0 +1,9 @@
+{% extends 'blog/base.html' %}
+
+{% block content %}
+<div style="margin-right:400px; margin-left:300px; margin-top: 20px; margin-bottom: 300px;">
+
+    <h4>{{ profile.user.username}}'s profile</h4>
+    <div class="input-group mb-3"><h5>Biography: {{ profile.biography }}</h5></div> 
+</div>
+{% endblock %}

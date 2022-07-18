@@ -14,7 +14,7 @@ from django.views.generic import ListView, DetailView, CreateView, FormView
 class BlogHome(DataMixin, ListView):
     model = Post
     context_object_name = 'posts'
-    template_name = 'index.html'
+    template_name = 'blog/index.html'
 
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -29,7 +29,7 @@ class BlogHome(DataMixin, ListView):
 class BlogPost(DataMixin, DetailView):
     model = Post
     context_object_name = 'post'
-    template_name = 'post.html'
+    template_name = 'blog/post.html'
     slug_url_kwarg = 'post_slug'
 
     def get_context_data(self, *, object_list=None, **kwargs):
@@ -42,7 +42,7 @@ class BlogPost(DataMixin, DetailView):
 class BlogCategory(DataMixin, ListView):
     model = Post
     context_object_name = 'posts'
-    template_name = 'category_posts.html'
+    template_name = 'blog/category_posts.html'
     queryset = Post.objects.all()
 
     def get_context_data(self, *, object_list=None, **kwargs):
@@ -63,9 +63,9 @@ def search_post(request):
         if search_form.is_valid():
             title = search_form.cleaned_data['title']
             post = Post.objects.filter(title__contains=str(title))
-            return render(request, 'index.html', {'categories': queryset, 'posts': post})
-        return render(request, 'not_found.html', {'categories': queryset, 'post': ''})
-    return redirect ("home")
+            return render(request, 'blog/index.html', {'categories': queryset, 'posts': post})
+        return render(request, 'blog/not_found.html', {'categories': queryset, 'post': ''})
+    return redirect('home')
 
 
 
