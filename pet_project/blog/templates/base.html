@@ -99,9 +99,9 @@
               <a class="blog-header-logo text-dark" href="{% url 'home' %}">Large</a>
             </div>
             <div class="col-4 d-flex justify-content-end align-items-center">
-              <form class="d-flex" role="search" method="post" action="{% url 'search_post' %}">
+              <form class="d-flex" role="search" method="POST" action="{% url 'search_post' %}">
                 {% csrf_token %}
-                    <input class="form-control me-2" type="search" name="search_post" placeholder="Input the title" aria-label="Search">
+                    <input class="form-control me-2" type="search" name="title" placeholder="Input the title" aria-label="Search">
                     <button class="btn btn-sm btn-outline-secondary" style="margin-right:10px;" type="submit">Search  </button>
                   </form>
                     {%  if request.user.is_authenticated %}

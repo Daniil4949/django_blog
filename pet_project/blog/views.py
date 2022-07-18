@@ -59,14 +59,13 @@ class BlogCategory(DataMixin, ListView):
 def search_post(request):
     queryset = Category.objects.all()
     search_form = Search_Post_Form(request.POST)
-    title = search_form.data['search_post']
-    try:
-        post = Post.objects.filter(title__contains=str(title))
-    except:
-        post = ''
-    if post:
-        return render(request, 'index.html', {'categories': queryset, 'posts': post})
-    return render(request, 'not_found.html', {'categories': queryset, 'post': post})
+    if request.method == 'POST':
+        if search_form.is_valid():
+            title = search_form.cleaned_data['title']
+            post = Post.objects.filter(title__contains=str(title))
+            return render(request, 'index.html', {'categories': queryset, 'posts': post})
+        return render(request, 'not_found.html', {'categories': queryset, 'post': ''})
+    return redirect ("home")
 
 
 
