@@ -21,6 +21,11 @@ class PhotoPostAdmin(admin.ModelAdmin):
     list_display = ('post', 'image')
 
 
+class CommentAdmin(admin.ModelAdmin):
+    list_display = ('user', 'post', 'content', 'time_created')
+
+
+admin.site.register(Comment, CommentAdmin)
 admin.site.register(Post, PostAdmin)
 admin.site.register(Category, CategoryAdmin)
 admin.site.register(Profile, ProfileAdmin)

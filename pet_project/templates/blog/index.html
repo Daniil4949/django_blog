@@ -1,0 +1,57 @@
+{% extends 'blog/base.html' %}
+
+{% block content %}
+{% if posts %}
+<div style="margin:50px;">
+ 
+<h3><center>We are always up to date</center></h3>
+<div style="width: 60%; margin-left: 280px;" id="carouselExampleControlsNoTouching" class="carousel slide" data-bs-touch="false" data-bs-interval="false">
+  <div class="carousel-inner">
+    <div class="carousel-item">
+      <img src="https://www.pewresearch.org/global/wp-content/uploads/sites/2/2019/03/PG_19.03.01_EU_Featured-Image.jpg" class="d-block w-100" alt="...">
+    </div>
+    <div class="carousel-item">
+      <img src="https://assets.bwbx.io/images/users/iqjWHBFdfxIU/ib3pST0G_x.E/v0/1200x-1.jpg" class="d-block w-100" alt="...">
+    </div>
+    <div class="carousel-item active">
+      <img src="http://static.prsa.pl/images/a8ea62ce-610d-4a6a-87f0-9b5f2e56144d.jpg" class="d-block w-100" alt="...">
+    </div>
+  </div>
+  <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControlsNoTouching" data-bs-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Previous</span>
+  </button>
+  <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControlsNoTouching" data-bs-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Next</span>
+  </button>
+</div>
+<hr style="color:black;">
+<center style="margin-top: 50px;"><h3>Latest News</h3></center> 
+<div class="row" style="margin-left: 40px;">
+    {% for post in posts %}
+    
+      <img src="{{post.photo}}" style="height: 425px; width: 60%; display: block; margin-right: 800px;"class="card-img-top" alt="...">
+      <div class="card-body">
+        <h6 class="card-text"> {{ post.time_created }} </h6>
+        <h5 class="card-title"> {{post.title}} </h5>
+        <p class="card-text" style="margin-left:5px; margin-right: 25px; margin-left: 45px;"> {{ post.content|linebreaks|truncatewords:80 }} <a href="{% url 'post' post.slug %}">Read more</a></p>
+      
+        <h6>Category:<a href="{% url 'posts_category' post.category.slug %}"> {{post.category}}</a></h6>
+        
+        
+        <br>
+    </div>
+  
+    
+  {% endfor %}
+ 
+</div>
+</div>
+{% else %}
+<div style="margin-left: 500px; margin-top:50px; margin-bottom:350px;">
+  <h3>Sorry, but there is nothing to show...</h3>
+  </div>
+{% endif %}  
+<br>
+{% endblock %}

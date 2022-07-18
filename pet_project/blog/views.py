@@ -14,7 +14,7 @@ from django.views.generic import ListView, DetailView, CreateView, FormView
 class BlogHome(DataMixin, ListView):
     model = Post
     context_object_name = 'posts'
-    template_name = 'index.html'
+    template_name = 'blog/index.html'
 
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -29,20 +29,24 @@ class BlogHome(DataMixin, ListView):
 class BlogPost(DataMixin, DetailView):
     model = Post
     context_object_name = 'post'
-    template_name = 'post.html'
+    template_name = 'blog/post.html'
     slug_url_kwarg = 'post_slug'
 
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super().get_context_data(**kwargs)
         info = self.get_post_content()
+        post = Post.objects.get(slug=self.kwargs.get('post_slug'))
+        context['comments'] = Comment.objects.filter(post=post)
+        #context['comments'] = Comment.objects.filter(slug=self.kwargs.get('post_slug'))
         context = dict(list(context.items()) + list(info.items()))
         return context
+
 
     
 class BlogCategory(DataMixin, ListView):
     model = Post
     context_object_name = 'posts'
-    template_name = 'category_posts.html'
+    template_name = 'blog/category_posts.html'
     queryset = Post.objects.all()
 
     def get_context_data(self, *, object_list=None, **kwargs):
@@ -59,14 +63,13 @@ class BlogCategory(DataMixin, ListView):
 def search_post(request):
     queryset = Category.objects.all()
     search_form = Search_Post_Form(request.POST)
-    title = search_form.data['search_post']
-    try:
-        post = Post.objects.filter(title__contains=str(title))
-    except:
-        post = ''
-    if post:
-        return render(request, 'index.html', {'categories': queryset, 'posts': post})
-    return render(request, 'not_found.html', {'categories': queryset, 'post': post})
+    if request.method == 'POST':
+        if search_form.is_valid():
+            title = search_form.cleaned_data['title']
+            post = Post.objects.filter(title__contains=str(title))
+            return render(request, 'blog/index.html', {'categories': queryset, 'posts': post})
+        return render(request, 'blog/not_found.html', {'categories': queryset, 'post': ''})
+    return redirect('home')
 
 
 
