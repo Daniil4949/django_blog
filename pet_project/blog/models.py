@@ -52,6 +52,7 @@ class Category(models.Model):
 class Profile(models.Model):
     user = models.OneToOneField(User, null=True, on_delete=models.SET_NULL)
     biography = models.TextField(blank=True, null=True)
+    photo = models.ImageField(blank=True, upload_to=f"profile/", null=True)
 
     def __str__(self):
         return f"{self.user.username}'s Profile"

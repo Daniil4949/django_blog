@@ -1,5 +1,7 @@
 from django import forms 
 from .models import Post, Profile
+from django.contrib.auth.models import User
+
 
 class Search_Post_Form(forms.ModelForm):
     title = forms.CharField(label='title', widget=forms.TextInput(attrs={'class': 'form-input'})),
@@ -9,8 +11,8 @@ class Search_Post_Form(forms.ModelForm):
     
 
 class ProfileForm(forms.ModelForm):
-    biography = forms.CharField(label='biography', widget=forms.TextInput(attrs={'class': 'form-input'})),
+
     class Meta:
         model = Profile
-        fields = ('biography',)
+        fields = ('biography', 'photo')
 
