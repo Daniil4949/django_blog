@@ -55,7 +55,7 @@ class Profile(models.Model):
     photo = models.ImageField(blank=True, upload_to=f"profile/", null=True)
 
     def __str__(self):
-        return f"{self.user.username}'s Profile"
+        return f"{self.user.username}"
 
 class PhotoPost(models.Model):
     post = models.ForeignKey('Post', on_delete=models.CASCADE)
@@ -65,5 +65,13 @@ class PhotoPost(models.Model):
         return self.post.title
 
 
+class Comment(models.Model):
+    user = models.ForeignKey(User, on_delete=models.PROTECT)
+    post = models.ForeignKey(Post, on_delete=models.PROTECT)
+    content = models.TextField()
+    time_created = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return f"{self.post}'s comment created by {self.user}"
 
 # Create your models here.

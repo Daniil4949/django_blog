@@ -35,8 +35,12 @@ class BlogPost(DataMixin, DetailView):
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super().get_context_data(**kwargs)
         info = self.get_post_content()
+        post = Post.objects.get(slug=self.kwargs.get('post_slug'))
+        context['comments'] = Comment.objects.filter(post=post)
+        #context['comments'] = Comment.objects.filter(slug=self.kwargs.get('post_slug'))
         context = dict(list(context.items()) + list(info.items()))
         return context
+
 
     
 class BlogCategory(DataMixin, ListView):
