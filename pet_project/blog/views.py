@@ -2,7 +2,7 @@ from urllib import request
 from django.http import HttpRequest, HttpResponse
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
-from .forms import Search_Post_Form, ProfileForm
+from .forms import Search_Post_Form, ProfileForm, CommentForm
 from .models import *
 from django import forms 
 from .utils import *
@@ -70,6 +70,19 @@ def search_post(request):
             return render(request, 'blog/index.html', {'categories': queryset, 'posts': post})
         return render(request, 'blog/not_found.html', {'categories': queryset, 'post': ''})
     return redirect('home')
+
+def add_comment(request, post_slug):
+    queryset = Category.objects.all()
+    comment_form = CommentForm(request.POST)
+    if request.method == 'POST':
+        if comment_form.is_valid():
+            post = Post.objects.get(slug=post_slug)
+            content = comment_form.cleaned_data['content']
+            comments = Comment.objects.filter(post=post)
+            Comment.objects.create(user=request.user, post=post, content=content)
+            return redirect('post', post_slug=post_slug)
+        return redirect('post', post_slug=post_slug)
+    return redirect('post', post_slug=post_slug)
 
 
 
