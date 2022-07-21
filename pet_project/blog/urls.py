@@ -1,12 +1,12 @@
-from django.contrib import admin
+from django.views.decorators.cache import cache_page
 from django.urls import path, include
 from .views import *
 
 
 urlpatterns = [
-    path('blog/', BlogHome.as_view(), name='home'),
+    path('blog/', cache_page(5)(BlogHome.as_view()), name='home'),
     path('blog/search/', search_post, name='search_post'),
-    path('blog/<slug:post_slug>/', BlogPost.as_view(), name='post'),
+    path('blog/<slug:post_slug>/', cache_page(60)(BlogPost.as_view()), name='post'),
     path('blog/<slug:post_slug>/add_comment/', add_comment, name='add_comment'),
-    path('blog/category/<slug:category_slug>/', BlogCategory.as_view(), name='posts_category'),
+    path('blog/category/<slug:category_slug>/', cache_page(5)(BlogCategory.as_view()), name='posts_category'),
 ]
