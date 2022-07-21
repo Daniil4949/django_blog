@@ -5,6 +5,7 @@
 <div style="margin:50px;">
  
 <h3><center>We are always up to date</center></h3>
+<div class="shadow-lg p-3 mb-5 bg-body rounded">
 <div style="width: 60%; margin-left: 280px;" id="carouselExampleControlsNoTouching" class="carousel slide" data-bs-touch="false" data-bs-interval="false">
   <div class="carousel-inner">
     <div class="carousel-item">
@@ -26,11 +27,14 @@
     <span class="visually-hidden">Next</span>
   </button>
 </div>
+  </div>
 <hr style="color:black;">
-<center style="margin-top: 50px;"><h3>Latest News</h3></center> 
-<div class="row" style="margin-left: 40px;">
+<center style="margin-top: 50px;"><h3>Latest News</h3></center>
+
+
     {% for post in posts %}
-    
+  <div class="shadow-lg p-3 mb-5 bg-body rounded">
+  <div class="row" style="margin-left: 40px;">
       <img src="{{post.photo}}" style="height: 425px; width: 60%; display: block; margin-right: 800px;"class="card-img-top" alt="...">
       <div class="card-body">
         <h6 class="card-text"> {{ post.time_created }} </h6>
@@ -42,16 +46,17 @@
         
         <br>
     </div>
-  
-    
+  </div>
+</div>
   {% endfor %}
  
-</div>
-</div>
+
+
 {% else %}
 <div style="margin-left: 500px; margin-top:50px; margin-bottom:350px;">
   <h3>Sorry, but there is nothing to show...</h3>
   </div>
 {% endif %}  
 <br>
+</div>
 {% endblock %}

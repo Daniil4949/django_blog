@@ -3,9 +3,10 @@
 {% block content %}
 {% if posts %}
 {% for post in posts %}
-<br>
-  <hr>
-    <hr>
+<div class="shadow-lg p-3 mb-5 bg-body rounded">
+  <div class="row" style="margin-left: 40px;">
+
+
     <p><img class="img-article-left thumb" src="{{post.photo}}" style="margin-left:25px;"></p>
       <div class="card-body">
         <h6 class="card-text"> {{ post.time_created }} </h6>
@@ -13,14 +14,12 @@
         <p class="card-text" style="margin-left:5px; margin-right: 25px; margin-left: 45px;"> {{ post.content|linebreaks|truncatewords:80 }} <a href="{% url 'post' post.slug %}">Read more</a></p>
       
         <h6>Category: {{post.category}}</h6>
-    
-        <br>
-    </div>
-  
-  
-  {% endfor %}
 
+  
+  </div>
 </div>
+</div>
+  {% endfor %}
 
 {% else %}
 <div style="margin-left: 500px; margin-top:50px; margin-bottom:300px;">

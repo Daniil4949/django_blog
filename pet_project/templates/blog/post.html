@@ -26,8 +26,8 @@
 		<p><h6> {{ comment.time_created }} </h6></p>
 	</div>
   </div>
-
 {% endfor %}
+
 {% if request.user.is_authenticated %}
 <form method="POST" action="{% url 'add_comment' post.slug %}">
 	{% csrf_token %}
@@ -38,5 +38,6 @@
 	  <button type="submit" style="margin-top:20px; margin-bottom: 10px;margin-left: 280px;"class="btn btn-primary">Send comment</button>
   </form>
   
-{% endif %}  
+{% endif %}
+
 {% endblock %}
