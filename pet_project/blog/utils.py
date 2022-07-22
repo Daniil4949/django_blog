@@ -6,6 +6,6 @@ class DataMixin:
     def get_post_content(self):
         context = dict()
         categories = Category.objects.all()
-        context['categories'] = categories
+        context['categories']= categories
         return context
        
