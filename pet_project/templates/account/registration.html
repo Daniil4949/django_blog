@@ -11,6 +11,7 @@
     {% endfor %}
 </div>
 {% endif %}
+    <div class="shadow-lg p-3 mb-5 bg-body rounded">
 <form method="post" action="{% url 'registration' %}">
     {% csrf_token %}
    <center><h4>Registration</h4></center>
@@ -34,6 +35,6 @@
       <center>{{ user_form.captcha }}</center>
       <center><button type="submit" style="margin-top:20px;"class="btn btn-primary">Sign up</button></center>
 </form>
-
+    </div>
 </div>
 {% endblock %}
