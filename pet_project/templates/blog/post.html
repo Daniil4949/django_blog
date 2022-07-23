@@ -15,6 +15,7 @@
 {% endif %}
 <center><h5>Discuss this post!</h5></center>
 {% for comment in comments %}
+<div class="shadow p-3 mb-5 bg-body rounded" style="margin-right:450px; margin-left:30px;">
 <div class="card" style="width: 44rem; margin-left: 25px; margin-bottom: 10px;">
 	<div class="card-body">
 		{% if request.user.username == comment.user.username %}
@@ -26,6 +27,7 @@
 		<p><h6> {{ comment.time_created }} </h6></p>
 	</div>
   </div>
+</div>
 {% endfor %}
 
 {% if request.user.is_authenticated %}
