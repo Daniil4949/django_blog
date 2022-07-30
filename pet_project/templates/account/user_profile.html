@@ -1,12 +1,12 @@
 {% extends 'blog/base.html' %}
 
 {% block content %}
-<div style="margin-right:400px; margin-left:300px; margin-top: 20px; margin-bottom: 300px;">
+<div style="margin-top: 20px; margin-bottom: 300px;">
 
     <h4>{{ profile.user.username}}'s profile</h4>
     {% if profile.photo %}
     {{ profile.user.username}}'s photo
-    <p><img class="card-img-top" alt="Thumbnail [100%x225]" style="width:50%" src="{{ profile.photo.url }}" data-holder-rendered="true"></p>
+    <p><img class="card-img-top" alt="Thumbnail [100%x225]" src="{{ profile.photo.url }}" data-holder-rendered="true"></p>
     {% endif %}
     {% if profile.biography %}
     <div class="input-group mb-3"><h5>Biography: {{ profile.biography }}</h5></div>
