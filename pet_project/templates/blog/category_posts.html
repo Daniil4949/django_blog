@@ -3,11 +3,11 @@
 {% block content %}
 {% if posts %}
 {% for post in posts %}
-<div class="shadow-lg p-3 mb-5 bg-body rounded" style="margin:30px;">
-  <div class="row" style="margin-left: 40px;">
+<div class="shadow-lg p-3 mb-5 bg-body rounded">
+  <div class="row">
 
 
-    <p><img class="img-article-left thumb" src="{{post.photo}}" style="margin-left:25px;"></p>
+    <img src="{{post.photo}}" class="card-img-top" alt="...">
       <div class="card-body">
         <h6 class="card-text"> {{ post.time_created }} </h6>
         <h5 class="card-title"> {{post.title}} </h5>
@@ -22,8 +22,9 @@
   {% endfor %}
 
 {% else %}
-<div style="margin-left: 500px; margin-top:50px; margin-bottom:300px;">
-  <h3>Sorry, but there is nothing to show...</h3>
+<div style="margin-top:50px; margin-bottom:350px;">
+  <h3><center>Sorry, but there is nothing to show...</center></h3>
   </div>
+
 {% endif %}  
 {% endblock %}

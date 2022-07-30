@@ -1,27 +1,27 @@
 {% extends 'blog/base.html' %}
 
 {% block content %}
-<h1> <div  style="margin-left:25px; font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif"> {{ post.title }} </div> </h1>
+<h1> <center>{{ post.title }}</center>   </h1>
 
 
 {% if post.photo %}
-	<p><img class="img-article-left thumb" src="{{post.photo}}" style="margin-left:25px; width:50%;"></p>
+	<img src="{{post.photo}}" class="card-img-top" alt="...">
 {% endif %}
-<div style="margin-left:25px;margin-right:25px;font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif">{{post.content|linebreaks}}</div>
+<div >{{post.content|linebreaks}}</div>
 {% if request.user.username == post.author.username %}
-<h5> <div  style="margin-left:25px; font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif"> Author of the post: <a href="{% url 'current_user_profile' %}">You</a> </div> </h5>
+<h5> <div> Author of the post: <a href="{% url 'current_user_profile' %}">You</a> </div> </h5>
 {% else %}
-<h5> <div  style="margin-left:25px; font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif"> Author of the post: <a href="{% url 'get_user_profile' post.author.id %}"> {{ post.author }}</a> </div> </h5>
+<h5> <div> Author of the post: <a href="{% url 'get_user_profile' post.author.id %}"> {{ post.author }}</a> </div> </h5>
 {% endif %}
 <center><h5>Discuss this post!</h5></center>
 {% for comment in comments %}
-<div class="shadow p-3 mb-5 bg-body rounded" style="margin-right:450px; margin-left:30px;">
-<div class="card" style="width: 44rem; margin-left: 25px; margin-bottom: 10px;">
+<div class="shadow p-3 mb-5 bg-body rounded">
+<div class="card" style="margin-bottom: 10px;">
 	<div class="card-body">
 		{% if request.user.username == comment.user.username %}
-		<h5> <div  style="margin-left:15px; font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif"> <a href="{% url 'current_user_profile' %}">You</a> </div> </h5>
+		<h5> <div > <a href="{% url 'current_user_profile' %}">You</a> </div> </h5>
 		{% else %}
-		<h5> <div  style="margin-left:15px; font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif"> <a href="{% url 'get_user_profile' comment.user.id %}"> {{ comment.user.profile }}</a> </div> </h5>
+		<h5> <div> <a href="{% url 'get_user_profile' comment.user.id %}"> {{ comment.user.profile }}</a> </div> </h5>
 		{% endif %}
 		<p class="card-text"> {{ comment.content }} </p>
 		<p><h6> {{ comment.time_created }} </h6></p>
@@ -34,10 +34,10 @@
 <form method="POST" action="{% url 'add_comment' post.slug %}">
 	{% csrf_token %}
 	<div class="input-group mb-3">
-		<h5><label for="exampleFormControlTextarea1"style="margin-left: 30px; margin-right:5px;"  class="form-label">Leave your comment below: </label></h5>
-		<textarea class="form-control" id="exampleFormControlTextarea1" name="content" style="margin-right:90px;" rows="3"></textarea>
+		<h5><label for="exampleFormControlTextarea1"  class="form-label">Leave your comment below: </label></h5>
+		<textarea class="form-control" id="exampleFormControlTextarea1" name="content"rows="3"></textarea>
 	  </div>
-	  <button type="submit" style="margin-top:20px; margin-bottom: 10px;margin-left: 280px;"class="btn btn-primary">Send comment</button>
+	  <button type="submit" class="btn btn-primary">Send comment</button>
   </form>
   
 {% endif %}
