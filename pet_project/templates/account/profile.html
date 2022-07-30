@@ -1,14 +1,15 @@
 {% extends 'blog/base.html' %}
 
 {% block content %}
-<div style="margin-right:400px; margin-left:200px; margin-top: 20px; margin-bottom: 120px;">
+<div class="container">
+<div style="margin-top: 20px; margin-bottom: 120px;">
 <form method="post" action="" enctype="multipart/form-data">
     {% csrf_token %}
-    <h4>Your profile</h4>
+    <h4><center>Your profile</center></h4>
     <div class="input-group mb-3"><h5>We sure, that you are a talented person, {{request.user.username}}, write about yourself</h5></div>
     {% if user.photo %}
     <h5>Your current photo:</h5>
-    <p><img class="card-img-top" alt="Thumbnail [100%x225]" style="width:50%" src="{{ user.photo.url }}" data-holder-rendered="true"></p>
+    <p><img class="card-img-top" alt="Thumbnail [100%x225]" src="{{ user.photo.url }}" data-holder-rendered="true"></p>
     {% endif %}
     {% if user.biography %}
     <p><div class="input-group mb-3"><h5>Your current bio: <p>{{ user.biography }}</p></h5></div></p>
@@ -25,5 +26,6 @@
 <!--      </div>  -->
 <!--    <button type="submit" style="margin-bottom:100px;" class="btn btn-primary">Submit</button>-->
 </form>
+</div>
 </div>
 {% endblock %}
